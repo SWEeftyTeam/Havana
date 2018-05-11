@@ -1,0 +1,489 @@
+/*
+
+* File : main.less
+* Versione : 1.0.0
+* Tipo : CSS
+* Data : 2018-04-23
+* Autore : SWEefty Team
+* E-mail : sweeftyteam@gmail.com
+*
+* Licenza : GPLv3
+*
+* Descrizione: template della vista esposta all'utente del plugin
+*
+* Registro modifiche :
+* Lisa Parma        || 2018-04-26 || Realizzazione CSS
+* Alberto Gallinaro || 2018-04-23 || Creazione file
+*
+*/
+
+h1 {
+    font-size: 2.5em;
+    margin: 0.5em;
+}
+.bg-warning {
+    background-color: #f0ad4e;
+}
+
+.bg-danger {
+        background-color: #d9534f;
+}
+
+
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+.container {
+    background-color: #FFF;
+    width: 97%;
+    display: flex;
+    font-size: 1.3em;
+    justify-content: space-between;
+}
+
+.bg-warning {
+  background-color: #f0ad4e;
+}
+
+.bg-danger {
+  background-color: #d9534f;
+}
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+
+.containerST {
+  background-color: #FFF;
+  width: 97%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.col-12-sm {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/**/
+
+table.stack {
+  margin: auto;
+  margin-bottom: 50px;
+  border-spacing: 0;
+  width: 80%;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #E1E1E1;
+  text-align: center;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+}
+
+table.stack th {
+  padding: 10px 15px;
+}
+
+table.stack td,
+th {
+  border-right: 0.5px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+}
+
+table.stack td {
+  white-space: unset;
+  word-break: break-all;
+  position: relative;
+}
+
+table.stack thead {
+  font-size: 1.2em;
+  color: #99999;
+}
+
+#nr,
+#time {
+  width: 1em;
+}
+
+#time2 {
+  width: 20%;
+}
+
+#err {
+  width: 2em;
+}
+
+th {
+  border-bottom: 1px solid #A1E2FF;
+}
+
+th:last-child {
+  border-right: 0;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+tr:first-child:hover {
+  background-color: #FFFFFF;
+}
+
+.contentRow tr:hover {
+  background-color: #FFFFFF;
+}
+
+.data {
+  position: relative;
+  z-index: 4;
+  padding: 10px;
+  min-width: 20px;
+}
+
+.content-td {
+  padding-top: 0;
+}
+
+.contentST {
+  position: relative;
+  z-index: 3;
+  border-top: 1px solid #cacaca;
+}
+
+.table-card {
+  position: absolute;
+  display: none;
+  background: #fff;
+  left: -16px;
+  right: -16px;
+  bottom: 0;
+  top: -36px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  border-radius: 3px;
+  border: 0.5px solid #999999;
+}
+
+tbody {
+  position: relative;
+}
+
+.table-gap {
+  padding: 8px;
+  display: none;
+  background: #E1E1E1;
+  border: none;
+}
+
+.main-row {
+  cursor: pointer;
+}
+
+.contentRow {
+  display: none;
+  text-align: left;
+}
+
+.tc-ok {
+  display: block;
+}
+
+.tg-ok {
+  display: table-cell;
+}
+
+.expanded {
+  display: table-row;
+}
+
+.error {
+  color: #E01F25;
+}
+
+.correct {
+  color: #00A000;
+}
+
+/* Switcher */
+
+.list-switcher {
+  text-align: center;
+}
+
+.list-switcher .fieldset {
+  display: inline-block;
+  position: relative;
+  padding: 2px;
+  border-radius: 50em;
+  border: 2px solid #A1E2FF;
+  ;
+  margin: 2em;
+  margin-bottom: 0em;
+}
+
+.list-switcher input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.list-switcher label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  float: left;
+  width: 90px;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  color: #000000;
+}
+
+.switch {
+  position: absolute;
+  top: 2px;
+  height: 40px;
+  width: 90px;
+  background-color: #A1E2FF;
+  /*background: radial-gradient(#fff,#A1E2FF);*/
+  border-radius: 50em;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  transition: transform 0.5s;
+  color: #FFFFFF;
+  padding: 1em;
+}
+
+.left {
+  left: 2px;
+}
+
+.right {
+  left: 2px;
+  -webkit-transform: translateX(90px);
+  -moz-transform: translateX(90px);
+  -ms-transform: translateX(90px);
+  -o-transform: translateX(90px);
+  transform: translateX(90px);
+}
+
+/* call tree */
+
+.hidden {
+  display: none;
+}
+
+.calltree,
+.querylist {
+  padding: 3em;
+}
+
+.call-table {
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.call-table th {
+  font: 10px;
+}
+
+.call-table th:last-child {
+  border-right: 0;
+}
+
+.call-table td:last-child {
+  border: 0;
+  padding: 1em 0em 1em 1em;
+}
+
+#timeMet,
+#time2Met {
+  width: 120px;
+}
+
+#nameMet,
+#timeMet,
+#time2Met {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+ul.list,
+ul.list ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+}
+
+ul.list ul {
+  position: relative;
+  margin-left: 10px;
+}
+
+ul.list ul:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px solid #ccc;
+}
+
+ul.list li {
+  position: relative;
+  padding: 3px 0px 3px 12px;
+  text-decoration: none;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+ul.list li span:hover,
+ul.list li span:hover+ul li span {
+  color: #C0C0C0;
+}
+
+ul.list ul li:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 8px;
+  height: 0;
+  border-top: 1px solid #ccc;
+}
+
+ul.list ul li:last-child:before {
+  top: 10px;
+  bottom: 0;
+  height: auto;
+}
+
+ul.list ul li:last-child:before {
+  top: 10px;
+  bottom: 0;
+  height: auto;
+  background: #fff;
+}
+
+.spacetree {
+  display: inline-block;
+  padding: 0em;
+  float: right;
+  width: 120px;
+  text-align: center;
+}
+
+
+/* Query list*/
+
+.querylist table {
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.querylist>th {
+  font: 10px;
+}
+
+.querylist th:last-child {
+  border-right: 0;
+}
+
+.querylist td:last-child {
+  border: 0;
+  padding: 0;
+}
+
+.queries {
+  padding: 0;
+  margin: 0;
+}
+
+#nrQR,
+#nameQR,
+#db,
+#timeQR,
+#time2QR {
+  padding: 10px 0px;
+  text-align: center;
+}
+
+#nrQR {
+  width: 7%;
+}
+
+
+#nameQR
+  {
+  width: 40%;
+}
+
+#db {
+  width: 15%;
+}
+
+#timeQR {
+  width: 20%;
+}
+
+#time2QR {
+  width: 15%;
+}
+
+.querylist td {
+  padding: 10px 10px;
+  text-align: center;
+}
+
+.isa_error {
+  color: #D8000C;
+  background-color: #FFD2D2;
+  border-radius: 5px;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.row {
+  width:80%;
+}

@@ -1,0 +1,160 @@
+<!--*
+
+* File : index.html
+* Versione : 1.0.0
+* Tipo : HTML / Javascript
+* Data : 2018-03-23
+* Autore : SWEefty Team
+* E-mail : sweeftyteam@gmail.com
+*
+* Licenza : GPLv3
+*
+* Descrizione: template della vista esposta all'utente del plugin
+*
+* Registro modifiche :
+* Lisa Parma        || 2018-04-26 || Realizzazione Stack Trace
+* Alberto Gallinaro || 2018-04-23 || Creazione file
+*
+*-->
+
+
+<div class="container" ng-controller="stackController">
+  <div class="row">
+    <br /><br /><br/>
+
+    <h1>Stack Trace</h1>
+    <div class="isa_error" ng-show="error">{{ error }}</div>
+    <table class="stack">
+      <thead>
+        <tr>
+          <th id="nr"> Nr. </th>
+          <th id="name"> Richiesta </th>
+          <th id="time"><a href="" ng-click="sortBy = 'duration'; sortReverse = !sortReverse"> Execution Time <img ng-src="{{sortUp}}" ng-show="sortBy == 'duration' && sortReverse == false" height="8" width="8"/><img ng-src="{{sortDown}}" height="8" width="8" ng-show="sortBy == 'duration' && sortReverse == true"/></a></th>
+          <th id="time2"><a href="" ng-click="sortBy = 'timestamp'; sortReverse = !sortReverse"> Timestamp <img ng-src="{{sortUp}}" height="8" width="8" ng-show="sortBy == 'timestamp' && sortReverse == false"/><img ng-src="{{sortDown}}" height="8" width="8" ng-show="sortBy == 'timestamp' && sortReverse == true"/></th>
+          <th id="err"> Errore </th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr ng-repeat-start="item in nodes | orderBy: '-timestamp' | orderBy:sortBy:sortReverse">
+          <td colspan="5" class="table-gap"></td>
+        </tr>
+        <tr class="main-row">
+          <td><div class="data">{{$index+1}}</div></td>
+          <td><div class="data">{{item.name}} - {{item.trace_id}}</div></td>
+          <td><div class="data">{{item.duration | limitTo: 8}} ms</div></td>
+          <td><div class="data">{{item.timestamp | limitTo: 10}} - {{item.timestamp | limitTo: -17 | limitTo: 8}} </div></td>
+          <td><div class="data correct" ng-if="false == item.error">{{item.error}}</div><div class="data error" ng-if="true == item.error">{{item.status_code}} </div></td>
+        </tr>
+        <tr class="contentRow">
+          <td colspan="5" class="content-td">
+            <div class="contentST">
+              <div class="list-switcher" ng-if="item.DBrequest">
+              <p class="fieldset">
+                <input type="radio" name="view" value="call" id="call-{{item.trace_id}}" checked>
+                <label for="call-{{item.trace_id}}">Call tree</label>
+                <input type="radio" name="view" value="query" id="query-{{item.trace_id}}">
+                <label for="query-{{item.trace_id}}">Query list</label>
+                <span class="switch left"></span>
+              </p>
+            </div>
+              <div class="calltree">
+                <table class="call-table">
+                  <thead>
+                    <tr>
+                      <th id="nameMet"> Nome </th>
+                      <th id="timeMet"> Selftime</th>
+                      <th id="time2Met"> Totaltime </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td colspan="3">
+                    <ul class="list">
+                      <span class="toggle"></span>
+                      <tree src="item"></tree>
+                    </ul>
+                    </td>
+                  </tbody>
+              </table>
+              </div>
+              <div class="querylist hidden">
+                <table>
+                  <thead>
+                    <tr>
+                      <th id="nrQR"> Nr. </th>
+                      <th id="nameQR"> Query </th>
+                      <th id="db"> Database </th>
+                      <th id="timeQR"><a href="" ng-click="sortQueryBy = 'duration'; sortQueryReverse = !sortQueryReverse"> Execution Time <img ng-src="{{sortUp}}" ng-show="sortQueryBy == 'duration' && sortQueryReverse == false" height="8" width="8"/><img ng-src="{{sortDown}}" height="8" width="8" ng-show="sortQueryBy == 'duration' && sortQueryReverse == true"/></a></th>
+          <th id="time2QR"><a href="" ng-click="sortQueryBy = 'timestamp'; sortQueryReverse = !sortQueryReverse"> Timestamp <img ng-src="{{sortUp}}" height="8" width="8" ng-show="sortQueryBy == 'timestamp' && sortQueryReverse == false"/><img ng-src="{{sortDown}}" height="8" width="8" ng-show="sortQueryBy == 'timestamp' && sortQueryReverse == true"/></a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in item.DBrequest | orderBy:sortQueryBy:sortQueryReverse" src="x" class="queries">
+          <td>{{index+1}}</td>
+          <td>{{x.text}}</td>
+          <td>{{x.database}}</td>
+          <td>{{x.duration}}</td>
+          <td>{{x.timestamp | limitTo: 10}} <br/> {{item.timestamp | limitTo: -17 | limitTo: 8}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="table-card "></div>
+</td>
+</tr>
+<tr ng-repeat-end="item in nodes">
+  <td colspan="5" class="table-gap"></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    /* Expand row */
+    $("body").on("click", ".main-row", function() {
+      $(this).next().toggleClass("expanded");
+      $(this).prev().children(".table-gap").toggleClass("tg-ok");
+      $(this).next().next().children(".table-gap").toggleClass("tg-ok");
+      $(this).next().children(".content-td").children(".table-card").toggleClass("tc-ok");
+    });
+
+    /* Switch call tree / query list */
+    $("body").on("click", ".contentST", function() {
+      var ogg = $(this);
+      $(this).find(".list-switcher").change(function() {
+        if (ogg.find("input[name=view]:checked").val() == "query") {
+          ogg.find(".calltree").addClass("hidden");
+          ogg.find(".querylist").removeClass("hidden");
+        } else {
+          ogg.find(".calltree").removeClass("hidden");
+          ogg.find(".querylist").addClass("hidden");
+        }
+      });
+    });
+
+    $("body").on("click", ".contentST", function() {
+      var ogg = $(this);
+      $(this).find(".list-switcher").change(function() {
+        if (ogg.find("input[name=view]:checked").val() == "query") {
+          ogg.find(".switch").addClass("right");
+          ogg.find(".switch").removeClass("left");
+        } else {
+          ogg.find(".switch").addClass("left");
+          ogg.find(".switch").removeClass("right");
+        }
+      });
+    });
+
+    /* call tree*/
+    $("body").on("click", "ul span.toggle", function() {
+      $(this).next("ul").slideToggle();
+    });
+  });
+</script>
+
+
+</div>
+</div>

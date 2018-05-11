@@ -1,0 +1,132 @@
+<!--*
+
+* File : index.html
+* Versione : 1.0.0
+* Tipo : HTML / Javascript
+* Data : 2018-03-23
+* Autore : SWEefty Team
+* E-mail : sweeftyteam@gmail.com
+*
+* Licenza : GPLv3
+*
+* Descrizione: template della vista esposta all'utente del plugin
+*
+* Registro modifiche :
+* Giuseppe Merlino  || 2018-04-27 || Realizzazione Javascript
+* Giuseppe Merlino  || 2018-04-25 || Realizzazione Mappa Topologica
+* Alberto Gallinaro || 2018-04-23 || Creazione file
+*
+*-->
+
+
+<div class="container" ng-controller="mapController">
+  <div class="row">
+    <h1>Mappa Topologica</h1>
+        <div class="isa_error" ng-show="error">{{ error }}</div>
+      <div id="fullscreen" class="col-12-sm">
+        <button id='reset' title='Reset Layout to Beginning'>
+              <i class='fa fa-undo'></i>
+        </button>
+        <button id='switch' title='Fullscreen switch'>
+              <i class='fa fa-arrows-alt'></i>
+        </button>
+        <svg id="canv" width="960" height="500"></svg>
+      </div>
+
+    <br /><br /><br/>
+
+    <script type="text/javascript">
+      $('#switch').on('click', function(){
+        var docElm = document.getElementById('fullscreen');
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+        else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+            cancelFullscreen();
+        }
+        else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+            cancelFullscreen();
+        }
+        else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+            cancelFullscreen();
+        }
+        if (docElm.requestFullscreen) {
+            docElm.requestFullscreen();
+        }
+        else if (docElm.mozRequestFullScreen) {
+            docElm.mozRequestFullScreen();
+            switchToFullscreen();
+        }
+        else if (docElm.webkitRequestFullScreen) {
+            docElm.webkitRequestFullScreen();
+            switchToFullscreen();
+        }
+        else if (docElm.msRequestFullscreen) {
+            docElm.msRequestFullscreen();
+            switchToFullscreen();
+        }
+
+      });
+    function switchToFullscreen(){
+      document.getElementById('canv').style.width = "100%";
+      document.getElementById('canv').style.height = "100%";
+      document.getElementById('fullscreen').style.width = "100%";
+    }
+    function cancelFullscreen(){
+      console.log('cancelFullscreen');
+      document.getElementById('canv').style.width = "960px";
+      document.getElementById('canv').style.height = "500px";
+    }
+      </script>
+
+
+    </div>
+</div>
+
+
+<style>
+
+    .bg-warning {
+        background-color: #f0ad4e;
+    }
+
+    .bg-danger {
+            background-color: #d9534f;
+    }
+
+    .links line {
+        stroke: #999;
+        stroke-opacity: 0.6;
+    }
+
+    .nodes circle {
+        stroke: #fff;
+        stroke-width: 1.5px;
+    }
+    .node text {
+        pointer-events: none;
+        font: 10px sans-serif;
+    }
+    .containerST {
+        background-color: #FFF;
+        width: 97%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .col-12-sm{
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: -1px;
+        background-color: #ffffff;
+        border: 1px solid #dddddd;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+</style>
